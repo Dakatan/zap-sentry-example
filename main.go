@@ -32,7 +32,7 @@ func fun3() error {
 
 type SentryZapCore struct {
 	enabledLevel zapcore.Level
-	fields map[string]interface{}
+	fields       map[string]interface{}
 }
 
 func (s *SentryZapCore) Enabled(level zapcore.Level) bool {
