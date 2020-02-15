@@ -15,7 +15,6 @@ func main() {
 	logger := newLogger()
 	if err := fun1(); err != nil {
 		logger.Errorw("error!", "error", err)
-		sentry.CaptureException(err)
 	}
 }
 
@@ -85,7 +84,7 @@ func (s *SentryZapCore) Write(entry zapcore.Entry, fields []zapcore.Field) error
 	}
 	event.Exception = exceptions
 	sentry.CaptureEvent(event)
-	_ = s.Sync()
+	defer s.Sync()
 	return nil
 }
 
